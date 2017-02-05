@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+<div id="content"></div>
+<input type="text" id="msg" />
+<input type="button" id="btnSend" value="send" />
+
+@section footer{
+    <script>
+
+        var socketClient = {
+            socket: '',
+            init: function () {
+                var url = 'ws://' + window.location.hostname + ":" + window.location.port;
+                url += "/api/ws";
+                this.socket = new WebSocket(url);
+
+                this.socket.onopen = function (event) {
+                    console.log("socket open");
+
+                    socketClient.socket.send("i'm listening");
+
+                    socketClient.socket.onmessage = function (event) {
+                        console.log('received a message', event);
+                        var data = event.data;
+                        output.print(data);
+                    };
+
+                    socketClient.socket.onclose = function (event) {
+                        console.log('socket closed', event);
+                    };
+
+                    socketClient.socket.onerror = function (event) {
+                        console.log(JSON.stringify(event));
+                    }
+                };
+            },
+            close: function () {
+                socketClient.socket.close();
+            }
+        }
+
+        var output = {
+            print: function (data) {
+                var content = $("#content");
+                content.append($("<div>" + data + "</div>"));
+            }
+        }
+
+        var testClient = {
+            print: function () {
+                output.print("abc");
+            }
+        }
+
+        socketClient.init();      
+
+        $("#btnSend").click(function () {
+            if (socketClient.socket.readyState == WebSocket.OPEN) {
+                var msg = $("#msg").val();
+                socketClient.socket.send(msg);
+            } else {
+                alert("连接已关闭");
+            }
+        });
+
+    </script>
+}
+
