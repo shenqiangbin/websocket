@@ -4,13 +4,42 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<script type="text/javascript" src="~/Scripts/swfobject.js"></script>
+<script type="text/javascript" src="~/Scripts/web_socket.js"></script>
+
 <h2>Index</h2>
 <div id="content"></div>
 <input type="text" id="msg" />
 <input type="button" id="btnSend" value="send" />
 
+@*
+    兼容IE8的方法：
+    参照：https://github.com/gimite/web-socket-js
+    方法：
+    拷贝如下：
+    <script type="text/javascript" src="~/Scripts/swfobject.js"></script>
+    <script type="text/javascript" src="~/Scripts/web_socket.js"></script>
+
+    将Scripts下面的swfobject.js、web_socket.js、WebSocketMain.swf拷贝走，
+
+    拷贝脚本：
+    WEB_SOCKET_DEBUG = true;
+    WEB_SOCKET_SWF_LOCATION = "/Scripts/WebSocketMain.swf";
+
+    其它的脚本还调用原来的Socket就可以。
+
+    如果在IE8下，Falsh握手不成功的话，将crossdomain.xml文件拷贝到默认网站目录下看是否可以。
+
+    参考文章：
+    [教程] Flash Socket通信的安全策略问题 843端口
+    http://blog.csdn.net/wclin88/article/details/7291607
+*@
+
+
 @section footer{
     <script>
+        WEB_SOCKET_DEBUG = true;
+        WEB_SOCKET_SWF_LOCATION = "/Scripts/WebSocketMain.swf";
 
         var socketClient = {
             socket: '',

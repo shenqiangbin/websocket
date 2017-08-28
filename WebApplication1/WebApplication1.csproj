@@ -105,6 +105,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="crossdomain.xml" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
@@ -113,6 +114,9 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\swfobject.js" />
+    <Content Include="Scripts\WebSocketMain.swf" />
+    <Content Include="Scripts\web_socket.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
